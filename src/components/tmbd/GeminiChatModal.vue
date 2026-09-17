@@ -132,7 +132,7 @@ export default {
       isTyping: false,
       showSettings: false,
       apiKeyInput: "",
-      selectedModel: "gemini-2.5-flash",
+      selectedModel: "gemini-3.5-flash",
       unreadCount: 0,
       userInput: "",
       messages: [
@@ -156,6 +156,7 @@ export default {
         this.unreadCount = 0;
         this.apiKeyInput = geminiService.getApiKey();
         this.selectedModel = geminiService.getModel();
+        this.showSettings = false;
         this.$nextTick(() => {
           this.scrollToBottom();
         });
@@ -230,6 +231,10 @@ export default {
   },
   mounted() {
     this.apiKeyInput = geminiService.getApiKey();
+    this.selectedModel = geminiService.getModel();
+    if (this.apiKeyInput && !localStorage.getItem("gemini_api_key")) {
+      geminiService.setApiKey(this.apiKeyInput);
+    }
   },
 };
 </script>
