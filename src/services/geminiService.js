@@ -97,7 +97,7 @@ export const geminiService = {
         temperature: 0.7,
         topK: 40,
         topP: 0.95,
-        maxOutputTokens: 1024,
+        maxOutputTokens: 8192,
       },
     };
 
@@ -180,7 +180,7 @@ Be concise, enthusiastic, and avoid major spoilers unless specifically asked.`;
         },
         generationConfig: {
           temperature: 0.7,
-          maxOutputTokens: 1000,
+          maxOutputTokens: 8192,
         },
       };
 
@@ -246,8 +246,9 @@ Do not include markdown code block backticks if possible, just raw JSON.`;
 
     try {
       const text = await this.generateContent(prompt);
-      const cleaned = text.replace(/```json/gi, "").replace(/```/g, "").trim();
-      const parsed = JSON.parse(cleaned);
+      const arrayMatch = text.match(/\[[\s\S]*\]/);
+      const jsonStr = arrayMatch ? arrayMatch[0] : text.replace(/```json/gi, "").replace(/```/g, "").trim();
+      const parsed = JSON.parse(jsonStr);
       this.setCached(cacheKey, parsed);
       return parsed;
     } catch (error) {
