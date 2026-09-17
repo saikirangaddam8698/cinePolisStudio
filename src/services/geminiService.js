@@ -118,7 +118,7 @@ export const geminiService = {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
         const response = await axios.post(url, payload, {
           headers: { "Content-Type": "application/json" },
-          timeout: 15000,
+          timeout: 25000,
         });
 
         const candidate = response.data?.candidates?.[0];
@@ -148,11 +148,16 @@ export const geminiService = {
     throw lastError || new Error("Failed to generate content from AI models");
   },
 
-  async chatWithCineBot(history, userMessage) {
-    const systemInstruction = `You are CineBot, an ultra-knowledgeable, friendly, and cinematic AI movie & TV show concierge.
-You recommend movies, TV shows, analyze plots, suggest hidden gems, and answer entertainment trivia.
-Format your responses with clean Markdown. When you recommend specific movies or TV series, wrap their titles in bold like **Inception** or **Breaking Bad** so the user can easily identify them.
-Be concise, enthusiastic, and avoid major spoilers unless specifically asked.`;
+  async chatWithCineBot(history = [], userMessage = "") {
+    const systemInstruction = `You are CineBot, the official cinematic AI concierge for CinePolis Studio.
+When the user asks for movie or TV show recommendations (e.g., thrillers, sci-fi, comedy, action, date night, or any mood/genre):
+- Always provide 4 to 5 top-tier recommendations unless the user specifies a different count.
+- For each recommended title, include:
+  1. **Title** in bold (e.g. **Prisoners**) with Release Year (e.g. (2013)) and Genre / Vibe.
+  2. A compelling 2-sentence pitch explaining why it fits their request and what makes it extraordinary.
+  3. Key appeal or notable stars (e.g. *"Directed by Denis Villeneuve, starring Hugh Jackman and Jake Gyllenhaal"*).
+- Format with clean Markdown, bullet points, and cinema emojis.
+- Be enthusiastic, conversational, and avoid spoilers.`;
 
     const apiKey = this.getApiKey();
     if (!apiKey) {
@@ -195,7 +200,7 @@ Be concise, enthusiastic, and avoid major spoilers unless specifically asked.`;
           const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
           const response = await axios.post(url, payload, {
             headers: { "Content-Type": "application/json" },
-            timeout: 15000,
+            timeout: 25000,
           });
 
           const reply = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -234,12 +239,12 @@ Be concise, enthusiastic, and avoid major spoilers unless specifically asked.`;
     const cached = this.getCached(cacheKey);
     if (cached) return cached;
 
-    const prompt = `You are a movie curator. The user is in the mood for: "${moodOrVibe}".
-Recommend 4 incredible movies or TV shows that perfectly fit this vibe.
-Return your response ONLY as a JSON array of objects with keys:
+    const prompt = `You are a master movie and entertainment curator for CinePolis Studio. The user is in the mood for: "${moodOrVibe}".
+Recommend 4 to 5 incredible, highly-rated movies or TV shows that perfectly fit this vibe.
+Return your response ONLY as a JSON array of 4 to 5 objects with keys:
 - "title": (string, exact official title)
 - "year": (string or number, e.g. "2014")
-- "reason": (1 punchy sentence why it matches the mood)
+- "reason": (1-2 punchy sentences why it matches the mood and what makes it special)
 - "vibe": (2-3 keywords, e.g. "Mind-Bending, Atmospheric")
 
 Do not include markdown code block backticks if possible, just raw JSON.`;
@@ -297,30 +302,45 @@ ${firstSentence} An engaging watch that balances emotional character arcs, tensi
 
   getFallbackMoods(mood) {
     const m = (mood || "").toLowerCase();
-    if (m.includes("mind") || m.includes("sci-fi") || m.includes("twist")) {
+    if (m.includes("thrill") || m.includes("suspense") || m.includes("crime") || m.includes("mystery")) {
+      return [
+        { title: "Prisoners", year: "2013", reason: "A morally complex, nail-biting search for abducted children that will grip you to the very end.", vibe: "Dark, Tense" },
+        { title: "Se7en", year: "1995", reason: "A grim, rain-soaked neo-noir procedural hunting a methodical serial killer.", vibe: "Atmospheric, Unsettling" },
+        { title: "Zodiac", year: "2007", reason: "David Fincher's meticulous, mesmerizing investigation into an elusive killer.", vibe: "Gripping, Procedural" },
+        { title: "Gone Girl", year: "2014", reason: "A sharp psychological thriller unraveling toxic secrets of modern marriage.", vibe: "Twisted, Sharp" },
+        { title: "Nightcrawler", year: "2014", reason: "A pulse-pounding, satirical crime thriller through the nocturnal underworld.", vibe: "Edgy, Compelling" }
+      ];
+    } else if (m.includes("mind") || m.includes("sci-fi") || m.includes("twist")) {
       return [
         { title: "Interstellar", year: "2014", reason: "An awe-inspiring journey through space, time, and human endurance.", vibe: "Mind-Bending, Emotional" },
         { title: "Inception", year: "2010", reason: "Layers of dreams within dreams that keep you guessing until the final frame.", vibe: "Complex, Thrilling" },
         { title: "Arrival", year: "2016", reason: "A philosophical masterpiece on communication, time, and alien encounters.", vibe: "Deep, Thought-Provoking" },
-        { title: "Shutter Island", year: "2010", reason: "A psychological maze on an isolated asylum with shocking revelations.", vibe: "Dark, Twist" }
+        { title: "Shutter Island", year: "2010", reason: "A psychological maze on an isolated asylum with shocking revelations.", vibe: "Dark, Twist" },
+        { title: "Memento", year: "2000", reason: "A reverse-chronology psychological puzzle about memory and obsession.", vibe: "Intriguing, Mystery" }
       ];
     } else if (m.includes("adrenaline") || m.includes("action") || m.includes("hype")) {
       return [
         { title: "Mad Max: Fury Road", year: "2015", reason: "Relentless high-octane post-apocalyptic vehicular symphony.", vibe: "Pure Energy, Intense" },
         { title: "John Wick", year: "2014", reason: "Masterclass in modern kinetic gun-fu action choreography.", vibe: "Stylized, Relentless" },
-        { title: "Top Gun: Maverick", year: "2022", reason: "Breathtaking aerial dogfights and visceral cinematic thrills.", vibe: "Exhilarating, Triumphant" }
+        { title: "Top Gun: Maverick", year: "2022", reason: "Breathtaking aerial dogfights and visceral cinematic thrills.", vibe: "Exhilarating, Triumphant" },
+        { title: "The Dark Knight", year: "2008", reason: "The definitive superhero noir thriller featuring legendary set pieces.", vibe: "Gripping, Epic" },
+        { title: "Mission: Impossible - Fallout", year: "2018", reason: "Dizzying real practical stunts and unmatched relentless pacing.", vibe: "Spectacle, Adrenaline" }
       ];
-    } else if (m.includes("cozy") || m.includes("feel good") || m.includes("comfort") || m.includes("heartwarming")) {
+    } else if (m.includes("cozy") || m.includes("feel good") || m.includes("comfort") || m.includes("heartwarming") || m.includes("relax")) {
       return [
-        { title: "Paddington 2", year: "2017", reason: "Pure, warm-hearted joy and wholesome charm for any day.", vibe: "Delightful, Wholesome" },
+        { title: "Chef", year: "2014", reason: "A heartwarming culinary road trip filled with soul, good music, and delicious food.", vibe: "Feel-Good, Wholesome" },
+        { title: "Paddington 2", year: "2017", reason: "Pure, warm-hearted joy and wholesome charm for any stressful day.", vibe: "Delightful, Comfort" },
         { title: "The Grand Budapest Hotel", year: "2014", reason: "A visually exquisite, pastel-hued comedic adventure.", vibe: "Quirky, Aesthetic" },
-        { title: "Spirited Away", year: "2001", reason: "A lush, comforting, and magical hand-drawn fantasy journey.", vibe: "Enchanting, Cozy" }
+        { title: "Spirited Away", year: "2001", reason: "A lush, comforting, and magical hand-drawn fantasy journey.", vibe: "Enchanting, Cozy" },
+        { title: "Amélie", year: "2001", reason: "A whimsical, heartwarming Parisian fairytale of secret acts of kindness.", vibe: "Charming, Joyful" }
       ];
     } else {
       return [
         { title: "The Dark Knight", year: "2008", reason: "The definitive superhero noir thriller featuring an iconic villain.", vibe: "Gripping, Masterpiece" },
         { title: "Everything Everywhere All at Once", year: "2022", reason: "A wildly creative multiverse rollercoaster of existential love.", vibe: "Inventive, Heartfelt" },
-        { title: "Dune", year: "2021", reason: "Monumental sci-fi worldbuilding with jaw-dropping scale and sound design.", vibe: "Epic, Cinematic" }
+        { title: "Dune", year: "2021", reason: "Monumental sci-fi worldbuilding with jaw-dropping scale and sound design.", vibe: "Epic, Cinematic" },
+        { title: "Parasite", year: "2019", reason: "A genre-defying dark comedic thriller that constantly defies expectations.", vibe: "Unpredictable, Brilliant" },
+        { title: "Whiplash", year: "2014", reason: "An electric psychological duel between ambition and ruthless perfection.", vibe: "Electrifying, High-Stakes" }
       ];
     }
   }

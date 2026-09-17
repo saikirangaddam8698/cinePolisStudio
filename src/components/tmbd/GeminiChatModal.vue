@@ -138,7 +138,7 @@ export default {
       messages: [
         {
           role: "bot",
-          text: `👋 Hey there! I'm your **AI Movie & TV Guide**.\n\nAsk me anything! For example:\n- *"Suggest 3 psychological thrillers like Inception"*\n- *"What should I watch if I love Stranger Things?"*\n- *"Cozy feel-good movies for date night"*`,
+          text: `👋 Hey there! I'm your **AI Movie & TV Guide**.\n\nAsk me anything! For example:\n- *"Suggest 5 edge-of-your-seat thrillers like Inception"*\n- *"What should I watch if I love Stranger Things?"*\n- *"Cozy feel-good movies for date night"*`,
         },
       ],
       quickPrompts: [
