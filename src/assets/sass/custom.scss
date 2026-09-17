@@ -98,3 +98,139 @@ a {
 a:hover {
   color: var(--tmdb-green);
 }
+
+/* ==========================================================================
+   Universal Consistency Design System - CinePolis Studio
+   ========================================================================== */
+
+/* 1. Universal Modal Backdrop */
+.modal-backdrop-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* 2. Universal Close Button with Pink Glow & 90deg Rotation Animation */
+.modal-close-btn,
+.cinematic-modal__close {
+  position: absolute !important;
+  top: 18px !important;
+  right: 22px !important;
+  background: var(--border-color) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  font-size: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 100 !important;
+}
+
+.modal-close-btn:hover,
+.cinematic-modal__close:hover {
+  background: var(--tmdb-pink) !important;
+  color: #ffffff !important;
+  transform: rotate(90deg) scale(1.1) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45) !important;
+}
+
+/* 3. Universal Modal Inset Scrollbars (Curvature Inset) */
+.cinematic-modal,
+.actor-modal,
+.cinebot-window {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 182, 212, 0.45) transparent;
+}
+
+.cinematic-modal::-webkit-scrollbar,
+.actor-modal::-webkit-scrollbar,
+.cinebot-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+.cinematic-modal::-webkit-scrollbar-track,
+.actor-modal::-webkit-scrollbar-track,
+.cinebot-body::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 18px 0;
+  border-radius: 10px;
+}
+
+.cinematic-modal::-webkit-scrollbar-thumb,
+.actor-modal::-webkit-scrollbar-thumb,
+.cinebot-body::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.45);
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.cinematic-modal::-webkit-scrollbar-thumb:hover,
+.actor-modal::-webkit-scrollbar-thumb:hover,
+.cinebot-body::-webkit-scrollbar-thumb:hover {
+  background: var(--tmdb-cyan);
+}
+
+/* 4. Universal Form Inputs & Search Boxes Focus Glow */
+.form-control:focus,
+.actor-search-input:focus,
+.mood-input:focus,
+.search-input:focus {
+  border-color: var(--tmdb-cyan) !important;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.22) !important;
+  outline: none !important;
+}
+
+/* 5. Universal Load More Buttons */
+.btn-load-more {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  padding: 10px 32px !important;
+  border-radius: 30px !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-load-more:hover {
+  background: var(--tmdb-gradient) !important;
+  color: #032541 !important;
+  border-color: transparent !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4) !important;
+}
+
+/* 6. Universal Card Edge & Elevation Consistency */
+.movie-card__poster-wrap,
+.tv-card__poster-wrap,
+.actor-card__photo-wrap,
+.media-card-poster-wrap {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.movie-card:hover .movie-card__poster-wrap,
+.tv-card:hover .tv-card__poster-wrap,
+.actor-card:hover .actor-card__photo-wrap,
+.media-card-item:hover .media-card-poster-wrap {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45), 0 0 20px var(--tmdb-cyan-glow) !important;
+}

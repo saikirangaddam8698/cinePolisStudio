@@ -333,21 +333,25 @@ export default {
 
 .header-icon-btn {
   background: rgba(255, 255, 255, 0.1);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #fff;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 13px;
-  transition: background 0.2s;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--tmdb-pink) !important;
+  color: #ffffff !important;
+  transform: rotate(90deg) scale(1.1) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45) !important;
 }
 
 .cinebot-settings-panel {

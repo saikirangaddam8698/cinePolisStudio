@@ -498,13 +498,13 @@ export default {
   max-height: 85vh;
   overflow-y: auto;
   overflow-x: hidden;
-  border-radius: 18px;
-  padding: 2rem;
+  border-radius: 20px;
+  padding: 2.2rem;
   border: 1px solid var(--border-color);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.7), 0 0 35px var(--tmdb-cyan-glow);
   color: var(--text-primary);
   scrollbar-width: thin;
-  scrollbar-color: rgba(1, 180, 228, 0.45) transparent;
+  scrollbar-color: rgba(6, 182, 212, 0.45) transparent;
 }
 
 .actor-modal::-webkit-scrollbar {
@@ -513,12 +513,12 @@ export default {
 
 .actor-modal::-webkit-scrollbar-track {
   background: transparent;
-  margin: 16px 0;
+  margin: 18px 0;
   border-radius: 10px;
 }
 
 .actor-modal::-webkit-scrollbar-thumb {
-  background: rgba(1, 180, 228, 0.45);
+  background: rgba(6, 182, 212, 0.45);
   border-radius: 10px;
   transition: background 0.2s;
 }
@@ -530,17 +530,28 @@ export default {
 .modal-close-btn {
   position: absolute;
   top: 18px;
-  right: 20px;
+  right: 22px;
   background: var(--border-color);
-  border: none;
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: var(--tmdb-pink) !important;
+  color: #ffffff !important;
+  transform: rotate(90deg) scale(1.1) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45) !important;
 }
 
 .actor-modal__photo {
