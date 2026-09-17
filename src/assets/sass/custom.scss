@@ -1,6 +1,100 @@
-@import "App";
-@import "homePagee";
-@import "moviesPage";
-@import "tvshowsPage";
-@import "actorsPage";
-@import "searchPage";
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Brand Accent Tokens */
+  --tmdb-cyan: #06b6d4;
+  --tmdb-cyan-glow: rgba(6, 182, 212, 0.4);
+  --tmdb-green: #10b981;
+  --tmdb-pink: #f43f5e;
+  --tmdb-gradient: linear-gradient(90deg, #06b6d4 0%, #10b981 100%);
+
+  /* Dark Theme Palette (Default) */
+  --bg-primary: #0b1120;
+  --bg-secondary: #131d33;
+  --bg-tertiary: #080d19;
+  --bg-card: rgba(19, 29, 51, 0.85);
+  --bg-card-solid: #131d33;
+  --bg-modal: #111a2e;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(6, 182, 212, 0.35);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+
+  /* Skeletons */
+  --skeleton-bg: rgba(255, 255, 255, 0.07);
+  --skeleton-hero-bg: #0d1527;
+  --skeleton-rating-bg: #081224;
+}
+
+[data-theme="light"] {
+  /* Light Theme Palette - Clean Editorial Streaming Style */
+  --bg-primary: #f1f5f9;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e2e8f0;
+  --bg-card: #ffffff;
+  --bg-card-solid: #ffffff;
+  --bg-modal: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-highlight: rgba(6, 182, 212, 0.5);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+
+  /* Light Skeletons */
+  --skeleton-bg: rgba(0, 0, 0, 0.06);
+  --skeleton-hero-bg: #cbd5e1;
+  --skeleton-rating-bg: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Outfit", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure bootstrap text-muted uses our variable */
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+/* Custom modern scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.35);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.7);
+}
+
+a {
+  color: var(--tmdb-cyan);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--tmdb-green);
+}

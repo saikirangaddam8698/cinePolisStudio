@@ -1,53 +1,162 @@
 <template>
-    <pre class="d-flex align-items-center justify-content-center">
-    Terms of Use
-The Movie Database (https://www.themoviedb.org/ (the "Site"), operated by TiVo Platform Technologies 
-LLC, 
-"TMDB", "We", "Us", or "Our") 
-allows You to: (a) participate in interactive features that We may make available from time to time
- through the Site; or (b) simply view this Site (the foregoing (a) and (b), collectively, the "Services"). 
- These Terms of Use explain the terms and conditions that apply to Your use of this Site and Services. 
- The terms and conditions in these Terms of Use that apply to the Site apply equally to the Services, 
- and visa versa. Regardless of how You use the Site or the Services, Your use of, and conduct on,
-  the Site, and use of the Services is governed by these Terms of Use and the Site’s Privacy Policy,
-   available at http://www.themoviedb.org/privacy-policy. ("You" or "Your", as used in these Terms of
-    Use, refers to, and includes, not only the individual accepting these Terms of Use but also any
-     legal entity that employs such individual or that such individual is acting for or on behalf of, 
-     and such individual represents and warrants that they have the legal authority to bind such 
-     legal entity to these API Terms of Use and that these API Terms of Use apply to such entity).
+  <div class="legal-page-container container-fluid px-4 px-md-5 py-5">
+    <div class="legal-content-wrapper mx-auto">
+      
+      <!-- Page Header -->
+      <div class="mb-5 pb-3 border-bottom border-secondary border-opacity-25">
+        <div class="legal-badge mb-2">
+          <span>📜 LEGAL DOCUMENTATION</span>
+        </div>
+        <h1 class="legal-title mb-2">Terms of Service</h1>
+        <p class="text-muted mb-0">
+          Last updated: September 2026 • CinePolis Studio Entertainment Platform
+        </p>
+      </div>
 
-BY USING THE SITE AND/OR THE SERVICES IN ANY MANNER, YOU UNCONDITIONALLY CONSENT AND AGREE TO 
-BE BOUND BY AND BE A PARTY TO THESE TERMS OF USE AND THE SITE’S PRIVACY POLICY. IF YOU DISAGREE 
-WITH ANY OF
- THE TERMS AND CONDITIONS IN EITHER THESE TERMS OF USE OR THE PRIVACY POLICY, DO NOT USE THE SITE
-  OR THE SERVICES.
+      <!-- Introduction Card -->
+      <div class="legal-card p-4 p-md-5 mb-4">
+        <h3 class="section-title mb-3">1. Acceptance of Terms</h3>
+        <p class="text-secondary leading-relaxed mb-0">
+          Welcome to CinePolis Studio ("we", "us", or "our"). By accessing or using our website, AI concierge, mood discovery engines, or entertainment catalog (collectively, the "Services"), you acknowledge and agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use our Services.
+        </p>
+      </div>
 
-1. Membership
-When you use the Site or the Services, you represent that: (a) any information you submit is 
-truthful and accurate; (b) You will update your contact information if it changes so that we can 
-contact You; (c) Your use of this Site and Your use of Services do not violate any applicable law
- or regulation; (d) You are 13 years of age or older; and (e) You will comply with the rules for
-  on-line conduct and making Contributions (as defined in Section 2 below), as discussed in 
-  Section 2 below. You further represent and warrant that You will comply with all local rules
-   regarding on-line conduct and acceptable Contributions.
+      <!-- Services & Metadata Card -->
+      <div class="legal-card p-4 p-md-5 mb-4">
+        <h3 class="section-title mb-3">2. CinePolis Studio Services & Media</h3>
+        <p class="text-secondary leading-relaxed mb-3">
+          CinePolis Studio provides movie, TV show, and actor discovery features, video trailers, ratings, and AI-driven conversational guidance. The platform utilizes licensed metadata, high-resolution imagery, and public YouTube streaming players for trailers.
+        </p>
+        <ul class="text-secondary ps-3 mb-0 leading-relaxed">
+          <li class="mb-2">Services are intended solely for personal, non-commercial entertainment and research.</li>
+          <li class="mb-2">You agree not to scrape, reverse engineer, or deploy automated bots that compromise service integrity or exceed API rate boundaries.</li>
+          <li>Trailer videos and third-party media remain the property of their respective film distributors and studios.</li>
+        </ul>
+      </div>
 
-2. User Conduct and Contributions
-A. Your Contributions. The Site may provide certain features for communication, posts, interactions,
- and submissions by users (collectively, "Contributions"). 
- To use the interactive features of the Site or the Services,
-  You must first register through the on-line registration process on the Site.
-   You are entirely responsible for the content of, and any harm resulting from,
-    any of Your Contributions, and You agree that We are not responsible for Your 
-    or any other user’s Contributions. When You create or make available a Contribution, 
-    You represent and warrant that you:
-  </pre>
+      <!-- AI Features & Gemini -->
+      <div class="legal-card p-4 p-md-5 mb-4">
+        <h3 class="section-title mb-3">3. Artificial Intelligence & Gemini 3.5 Features</h3>
+        <p class="text-secondary leading-relaxed mb-0">
+          Our platform integrates Google Gemini 3.5 Flash to power the CineBot Concierge, contextual plot analysis, and the AI Mood Matcher. AI-generated responses are provided for creative entertainment purposes. While we strive for accuracy in cast credits, trivia, and release dates, CinePolis Studio does not guarantee absolute precision for generated film interpretations.
+        </p>
+      </div>
+
+      <!-- User Conduct & Community Safety -->
+      <div class="legal-card p-4 p-md-5 mb-4">
+        <h3 class="section-title mb-3">4. User Conduct & Acceptable Use</h3>
+        <p class="text-secondary leading-relaxed mb-3">
+          When submitting search queries, conversational prompts to CineBot, or interacting with community features, you agree not to:
+        </p>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="rule-box p-3 rounded-3">
+              <span class="text-danger me-2">✕</span> Submit abusive, offensive, or infringing content.
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="rule-box p-3 rounded-3">
+              <span class="text-danger me-2">✕</span> Exploit or inject unauthorized malicious scripts or keys.
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="rule-box p-3 rounded-3">
+              <span class="text-danger me-2">✕</span> Attempt to bypass rate limits or system security features.
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="rule-box p-3 rounded-3">
+              <span class="text-danger me-2">✕</span> Misrepresent affiliation with CinePolis Studio or copyright holders.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Limitation of Liability -->
+      <div class="legal-card p-4 p-md-5 mb-4">
+        <h3 class="section-title mb-3">5. Disclaimer & Limitation of Liability</h3>
+        <p class="text-secondary leading-relaxed mb-0">
+          The Services and all materials, metadata, and AI interactions are provided on an "as is" and "as available" basis without warranty of any kind. In no event shall CinePolis Studio or its creators be liable for indirect, incidental, or consequential damages resulting from the use or inability to use the platform.
+        </p>
+      </div>
+
+      <!-- Back Navigation -->
+      <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-secondary border-opacity-25">
+        <router-link to="/" class="btn btn-outline-secondary rounded-pill px-4">
+          ← Return Home
+        </router-link>
+        <router-link to="/guidlinespage" class="btn btn-primary rounded-pill px-4">
+          Read Community Guidelines →
+        </router-link>
+      </div>
+
+    </div>
+  </div>
 </template>
 
-<script lang="ts" setup>
-
+<script>
+export default {
+  name: "termsPage",
+};
 </script>
-<style scooped>
-.contact{
-    height: 100vh;
+
+<style scoped>
+.legal-page-container {
+  background: var(--bg-primary);
+  min-height: 85vh;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.legal-content-wrapper {
+  max-width: 900px;
+}
+
+.legal-badge {
+  display: inline-block;
+  background: rgba(6, 182, 212, 0.15);
+  border: 1px solid var(--tmdb-cyan);
+  color: var(--tmdb-cyan);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.legal-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.legal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.25s ease;
+}
+
+.legal-card:hover {
+  border-color: var(--tmdb-cyan);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.leading-relaxed {
+  line-height: 1.7;
+}
+
+.rule-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 </style>
