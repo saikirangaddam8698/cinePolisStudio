@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#01b4e4" />
+      <stop offset="100%" stop-color="#90cea1" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#01b4e4" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <!-- Background rounded squircle -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#032541" stroke="url(#grad)" stroke-width="2.5" />
+  
+  <!-- Clapperboard top strip -->
+  <rect x="15" y="18" width="34" height="8" rx="2" fill="url(#grad)" filter="url(#glow)" />
+  
+  <!-- Diagonal stripes on clapper top -->
+  <path d="M22 18 L26 26 M31 18 L35 26 M40 18 L44 26" stroke="#032541" stroke-width="2.2" stroke-linecap="round" />
+  
+  <!-- Clapper body -->
+  <rect x="15" y="28" width="34" height="20" rx="3" fill="#0a192f" stroke="url(#grad)" stroke-width="1.5" />
+  
+  <!-- Play triangle in center -->
+  <path d="M29 33 L39 38 L29 43 Z" fill="url(#grad)" />
+  
+  <!-- Cinema Sparkles -->
+  <circle cx="43" cy="33" r="1.5" fill="#90cea1" />
+</svg>
