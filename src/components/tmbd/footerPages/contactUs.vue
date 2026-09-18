@@ -96,9 +96,40 @@
               ></textarea>
             </div>
             <div class="col-12 mt-4">
-              <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 fw-bold" :disabled="isSubmitting">
-                <span v-if="isSubmitting">Sending...</span>
-                <span v-else>Send Message ✉️</span>
+              <button
+                type="submit"
+                class="btn btn-submit-message rounded-pill px-5 py-2 fw-bold"
+                :disabled="isSubmitting"
+              >
+                <span v-if="isSubmitting" class="d-inline-flex align-items-center gap-2">
+                  <span class="spinner-border spinner-border-sm text-info" role="status"></span>
+                  Sending...
+                </span>
+                <span v-else class="d-inline-flex align-items-center gap-2">
+                  <span>Send Message</span>
+                  <svg
+                    class="send-message-logo"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="cinepolisSendGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#06b6d4" />
+                        <stop offset="100%" stop-color="#10b981" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M3 8L10.89 13.26C11.56 13.71 12.44 13.71 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"
+                      stroke="url(#cinepolisSendGrad)"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
               </button>
             </div>
           </div>
@@ -246,5 +277,47 @@ export default {
 
 .sent-icon {
   font-size: 2.5rem;
+}
+
+.btn-submit-message {
+  background: var(--bg-secondary) !important;
+  border: 1.5px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  font-weight: 700;
+  padding: 10px 32px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-submit-message:hover:not(:disabled) {
+  border-color: var(--tmdb-cyan) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.35) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .btn-submit-message {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .btn-submit-message:hover:not(:disabled) {
+  border-color: #0284c7 !important;
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.2) !important;
+}
+
+.send-message-logo {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.btn-submit-message:hover .send-message-logo {
+  transform: translateX(3px) scale(1.08);
 }
 </style>
