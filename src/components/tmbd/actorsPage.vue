@@ -620,4 +620,15 @@ export default {
 .empty-icon {
   font-size: 3rem;
 }
+
+@media (max-width: 768px) {
+  .actor-search-input {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .actor-modal {
+    padding: 1.5rem 1rem !important;
+  }
+}
 </style>

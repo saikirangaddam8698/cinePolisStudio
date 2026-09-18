@@ -929,4 +929,19 @@ export default {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
+
+@media (max-width: 576px) {
+  .mood-input-wrap {
+    width: 100%;
+    flex-direction: column;
+  }
+  .mood-input {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .btn-mood-search {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
 </style>

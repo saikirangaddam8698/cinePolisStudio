@@ -87,7 +87,7 @@
               title="Open AI Concierge"
             >
               <span class="sparkle-gemini">✨</span>
-              <span class="ai-text">Ask AI</span>
+              <span class="ai-text d-none d-sm-inline">Ask AI</span>
             </button>
 
             <!-- Mobile Hamburger Button -->
@@ -105,7 +105,7 @@
 
         <!-- Mobile Drawer (Only visible when isMobileOpen is true) -->
         <div v-if="isMobileOpen" class="mobile-nav-panel d-lg-none mt-3 p-3 rounded-3 shadow">
-          <ul class="list-unstyled mb-3 d-flex flex-column gap-2">
+          <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
             <li>
               <router-link to="/" class="mobile-nav-link" @click="isMobileOpen = false" exact>
                 Home
@@ -127,23 +127,55 @@
               </router-link>
             </li>
           </ul>
-
-          <div class="border-top pt-2">
-            <label class="small text-muted mb-1 d-block">Region / Language</label>
-            <select
-              class="form-select form-select-sm bg-dark text-light border-secondary"
-              :value="selectedLanguage"
-              @change="onMobileRegionChange($event.target.value)"
-            >
-              <option v-for="reg in regionsList" :key="reg.code" :value="reg.code">
-                {{ reg.flag }} {{ reg.name }} ({{ reg.sub }})
-              </option>
-            </select>
-          </div>
         </div>
 
       </div>
     </header>
+
+    <!-- Mobile & Tablet Quick Region Bar (Outside header, directly above page lists) -->
+    <div class="mobile-region-bar d-lg-none">
+      <div class="container-fluid px-3 py-2 d-flex align-items-center gap-2">
+        <!-- Region Dropdown Picker -->
+        <div class="dropdown flex-shrink-0">
+          <button
+            class="btn btn-mobile-region-dropdown dropdown-toggle"
+            type="button"
+            id="mobileRegionDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="globe-icon">🌐</span>
+            <span class="mobile-region-label">{{ currentRegionLabel }}</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-custom shadow" aria-labelledby="mobileRegionDropdown">
+            <li v-for="reg in regionsList" :key="reg.code">
+              <a
+                class="dropdown-item d-flex justify-content-between align-items-center"
+                :class="{ active: selectedLanguage === reg.code }"
+                href="#"
+                @click.prevent="selectRegion(reg)"
+              >
+                <span>{{ reg.flag }} {{ reg.name }}</span>
+                <small class="text-muted ms-2">{{ reg.sub }}</small>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Quick Tap Region Pills (Horizontal Scroll) -->
+        <div class="mobile-region-chips d-flex align-items-center gap-1 overflow-auto">
+          <button
+            v-for="reg in regionsList"
+            :key="reg.code"
+            :class="['mobile-chip', { 'mobile-chip--active': selectedLanguage === reg.code }]"
+            @click="selectRegion(reg)"
+          >
+            <span>{{ reg.flag }}</span>
+            <span>{{ reg.name.split(' ')[0] }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- Main Dynamic Route View -->
     <main class="flex-grow-1">
@@ -548,6 +580,72 @@ export default {
 .mobile-nav-link:hover {
   background: rgba(6, 182, 212, 0.1);
   color: var(--tmdb-cyan);
+}
+
+/* Mobile & Tablet Region Bar - Sticky outside header above content */
+.mobile-region-bar {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 54px;
+  z-index: 1010;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.btn-mobile-region-dropdown {
+  background: var(--border-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.btn-mobile-region-dropdown:hover,
+.btn-mobile-region-dropdown:focus {
+  border-color: var(--tmdb-cyan);
+  color: var(--text-primary);
+}
+
+.mobile-region-chips {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobile-region-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-chip {
+  background: var(--border-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.mobile-chip:hover,
+.mobile-chip--active {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: var(--tmdb-cyan);
+  color: var(--tmdb-cyan);
+  font-weight: 700;
 }
 
 /* Footer */

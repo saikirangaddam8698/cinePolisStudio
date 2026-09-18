@@ -24,10 +24,10 @@
           </div>
         </div>
         <div class="d-flex align-items-center gap-2">
-          <button class="header-icon-btn" @click="showSettings = !showSettings" title="AI Settings">
+          <button class="header-icon-btn header-icon-btn--settings" @click="showSettings = !showSettings" title="AI Settings">
             ⚙️
           </button>
-          <button class="header-icon-btn" @click="toggleChat" title="Close">
+          <button class="header-icon-btn header-icon-btn--close" @click="toggleChat" title="Close">
             ✕
           </button>
         </div>
@@ -346,7 +346,15 @@ export default {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.header-icon-btn:hover {
+.header-icon-btn--settings:hover {
+  background: var(--tmdb-cyan) !important;
+  color: #032541 !important;
+  transform: rotate(45deg) scale(1.1) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px var(--tmdb-cyan-glow) !important;
+}
+
+.header-icon-btn--close:hover {
   background: var(--tmdb-pink) !important;
   color: #ffffff !important;
   transform: rotate(90deg) scale(1.1) !important;
@@ -509,5 +517,17 @@ export default {
 
 .animate-slide-up {
   animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 576px) {
+  .cinebot-window {
+    width: calc(100vw - 20px) !important;
+    max-width: calc(100vw - 20px) !important;
+    right: 10px !important;
+    bottom: 74px !important;
+    height: 76vh !important;
+    max-height: 76vh !important;
+    border-radius: 16px !important;
+  }
 }
 </style>

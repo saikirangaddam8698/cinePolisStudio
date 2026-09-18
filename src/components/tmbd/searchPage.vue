@@ -89,6 +89,7 @@ export default {
     selectItem(item) {
       this.isFocused = false;
       if (item.media_type === "person") {
+        this.$store.commit("setSearchTxt", item.name);
         this.$router.push({ name: "actorsPage" });
       } else {
         this.openDetailModal({ item, type: item.media_type || "movie" });
@@ -133,17 +134,16 @@ export default {
 }
 
 .search-bar {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 25px;
   padding: 4px 14px;
   transition: all 0.2s ease;
 }
 
 .search-bar:focus-within {
-  border-color: #01b4e4;
-  box-shadow: 0 0 15px rgba(1, 180, 228, 0.35);
-  background: rgba(15, 23, 42, 0.98);
+  border-color: var(--tmdb-cyan);
+  box-shadow: 0 0 15px var(--tmdb-cyan-glow);
 }
 
 .search-icon {
@@ -155,27 +155,27 @@ export default {
 .search-input {
   background: transparent !important;
   border: none !important;
-  color: #fff !important;
+  color: var(--text-primary) !important;
   font-size: 0.88rem;
   padding: 4px 0;
   box-shadow: none !important;
 }
 
 .search-input::placeholder {
-  color: #94a3b8;
+  color: var(--text-secondary);
 }
 
 .clear-btn {
   background: none;
   border: none;
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 12px;
   cursor: pointer;
   padding: 0 4px;
 }
 
 .clear-btn:hover {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .search-dropdown {
@@ -184,18 +184,19 @@ export default {
   left: 0;
   right: 0;
   margin-top: 8px;
-  background: rgba(4, 21, 45, 0.98);
+  background: var(--bg-card);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(1, 180, 228, 0.3);
+  border: 1px solid var(--border-highlight);
   border-radius: 14px;
   z-index: 1000;
   max-height: 400px;
   overflow-y: auto;
+  box-shadow: var(--card-shadow);
 }
 
 .result-item {
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border-color);
   transition: background 0.15s ease;
 }
 
@@ -204,7 +205,7 @@ export default {
 }
 
 .result-item:hover {
-  background: rgba(1, 180, 228, 0.15);
+  background: rgba(6, 182, 212, 0.15);
 }
 
 .result-thumb {
@@ -216,7 +217,7 @@ export default {
 }
 
 .result-title {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 0.88rem;
   white-space: nowrap;
@@ -227,22 +228,23 @@ export default {
 
 .result-meta {
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
 }
 
 .badge-media-type {
-  background: rgba(1, 180, 228, 0.25);
-  color: #01b4e4;
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--tmdb-cyan);
   text-transform: uppercase;
   font-size: 0.65rem;
   font-weight: 700;
   padding: 2px 6px;
+  border-radius: 4px;
 }
 
 .result-arrow {
-  color: #90cea1;
+  color: var(--tmdb-green);
   font-size: 0.9rem;
   margin-right: 6px;
 }

@@ -121,6 +121,8 @@
                     v-for="person in castList.slice(0, 8)"
                     :key="person.id"
                     class="cast-card"
+                    @click="goToActor(person.name)"
+                    :title="`Explore ${person.name}`"
                   >
                     <img
                       :src="getProfileUrl(person.profile_path)"
@@ -233,6 +235,14 @@ export default {
         this.aiInsight = "Could not generate insight at this moment.";
       } finally {
         this.isGeneratingInsight = false;
+      }
+    },
+    goToActor(actorName) {
+      if (!actorName) return;
+      this.close();
+      this.$store.commit("setSearchTxt", actorName);
+      if (this.$route.name !== "actorsPage") {
+        this.$router.push({ name: "actorsPage" });
       }
     },
   },
@@ -510,6 +520,12 @@ export default {
 .cast-card {
   flex: 0 0 90px;
   text-align: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cast-card:hover {
+  transform: translateY(-4px);
 }
 
 .cast-avatar {
@@ -520,6 +536,12 @@ export default {
   border: 2px solid var(--tmdb-cyan);
   margin-bottom: 6px;
   background: var(--skeleton-bg);
+  transition: all 0.25s ease;
+}
+
+.cast-card:hover .cast-avatar {
+  border-color: var(--tmdb-green);
+  box-shadow: 0 0 14px var(--tmdb-cyan-glow);
 }
 
 .cast-name {
