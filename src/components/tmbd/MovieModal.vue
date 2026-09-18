@@ -118,10 +118,10 @@
                 </div>
                 <div v-else-if="castList.length > 0" class="cast-row">
                   <div
-                    v-for="person in castList.slice(0, 8)"
+                    v-for="person in castList.slice(0, 10)"
                     :key="person.id"
                     class="cast-card"
-                    @click="goToActor(person.name)"
+                    @click="goToActor(person)"
                     :title="`Explore ${person.name}`"
                   >
                     <img
@@ -237,13 +237,16 @@ export default {
         this.isGeneratingInsight = false;
       }
     },
-    goToActor(actorName) {
-      if (!actorName) return;
+    goToActor(person) {
+      if (!person) return;
+      const actorName = typeof person === "string" ? person : person.name;
+      const actorId = person.id;
       this.close();
       this.$store.commit("setSearchTxt", actorName);
-      if (this.$route.name !== "actorsPage") {
-        this.$router.push({ name: "actorsPage" });
-      }
+      this.$router.push({
+        name: "actorsPage",
+        query: { actor: actorName, id: actorId ? String(actorId) : undefined },
+      });
     },
   },
   mounted() {

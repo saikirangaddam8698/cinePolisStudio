@@ -202,19 +202,28 @@ export default {
         }
       }
 
-      return [...startsWithMatches, ...includesMatches];
+      const filtered = [...startsWithMatches, ...includesMatches];
+      return filtered.length > 0 ? filtered : list;
     },
   },
   watch: {
+    "$route.query.actor"(newActor) {
+      if (newActor && newActor.trim()) {
+        this.actorSearch = newActor.trim();
+        this.performDirectActorSearch(newActor.trim(), true, this.$route.query.id);
+      }
+    },
     selectedLanguage(newLang) {
-      this.actorSearch = "";
-      this.loadActorsForRegion(newLang || "");
+      if (!this.$route.query.actor && !this.actorSearch) {
+        this.actorSearch = "";
+        this.loadActorsForRegion(newLang || "");
+      }
     },
     actorSearch(newTerm) {
       this.handleActorSearch(newTerm);
     },
     searchTxt(newTerm) {
-      if (this.$route.name === "actorsPage") {
+      if (this.$route.name === "actorsPage" && newTerm !== this.actorSearch) {
         this.actorSearch = newTerm;
       }
     },
@@ -227,7 +236,43 @@ export default {
     clearActorSearch() {
       this.actorSearch = "";
       this.$store.commit("setSearchTxt", "");
+      if (this.$route.query.actor) {
+        this.$router.replace({ name: "actorsPage" });
+      }
       this.handleActorSearch("");
+    },
+    async performDirectActorSearch(term, autoSelect = false, actorId = null) {
+      clearTimeout(this.searchTimeout);
+      const query = (term || "").trim();
+      if (!query) {
+        this.isLiveSearching = false;
+        this.currentPage = 1;
+        await this.loadActorsForRegion(this.selectedLanguage || "");
+        return;
+      }
+
+      this.isLiveSearching = true;
+      this.isLoadingInitial = true;
+      this.currentPage = 1;
+      try {
+        const results = await this.$store.dispatch("searchActors", {
+          query,
+          page: 1,
+          append: false,
+        });
+
+        if (autoSelect && results && results.length > 0) {
+          const match = actorId
+            ? results.find((a) => a.id === Number(actorId)) || results[0]
+            : results[0];
+          this.selectedActor = match;
+        }
+      } catch (err) {
+        console.error("Error performing direct actor search:", err);
+      } finally {
+        this.isLiveSearching = false;
+        this.isLoadingInitial = false;
+      }
     },
     handleActorSearch(term) {
       clearTimeout(this.searchTimeout);
@@ -264,7 +309,10 @@ export default {
     },
     getImageUrl(path) {
       if (!path) return require("@/assets/cinema_logo.jpg");
-      return `https://image.tmdb.org/t/p/w500${path}`;
+      return `https://image.tmdb.org/t/p/w342${path}`;
+    },
+    selectActor(actor) {
+      this.selectedActor = actor;
     },
     getKnownForTitle(work) {
       if (!work) return "";
@@ -304,7 +352,12 @@ export default {
     },
   },
   async mounted() {
-    if (!this.actorsData || this.actorsData.length === 0 || !this.selectedLanguage) {
+    const queryActor = (this.$route.query.actor || this.searchTxt || "").trim();
+    const queryId = this.$route.query.id;
+    if (queryActor) {
+      this.actorSearch = queryActor;
+      await this.performDirectActorSearch(queryActor, true, queryId);
+    } else if (!this.actorsData || this.actorsData.length === 0 || !this.selectedLanguage) {
       await this.loadActorsForRegion(this.selectedLanguage || "");
     }
   },
