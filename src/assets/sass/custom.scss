@@ -186,7 +186,7 @@ a:hover {
   background: var(--tmdb-cyan);
 }
 
-/* 4. Universal Form Inputs & Search Boxes Focus Glow */
+/* 4. Universal Form Inputs & Search Boxes Focus Glow & High Contrast Placeholders */
 .form-control:focus,
 .actor-search-input:focus,
 .mood-input:focus,
@@ -194,6 +194,21 @@ a:hover {
   border-color: var(--tmdb-cyan) !important;
   box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.22) !important;
   outline: none !important;
+}
+
+::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.9 !important;
+}
+
+[data-theme="dark"] ::placeholder {
+  color: #94a3b8 !important;
+  opacity: 0.95 !important;
+}
+
+[data-theme="light"] ::placeholder {
+  color: #64748b !important;
+  opacity: 0.95 !important;
 }
 
 /* 5. Universal Load More Buttons */

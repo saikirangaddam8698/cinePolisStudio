@@ -24,49 +24,10 @@
           </div>
         </div>
         <div class="d-flex align-items-center gap-2">
-          <button class="header-icon-btn header-icon-btn--settings" @click="showSettings = !showSettings" title="AI Settings">
-            ⚙️
-          </button>
           <button class="header-icon-btn header-icon-btn--close" @click="toggleChat" title="Close">
             ✕
           </button>
         </div>
-      </div>
-
-      <!-- Settings Panel (slide-down if clicked) -->
-      <div v-if="showSettings" class="cinebot-settings-panel">
-        <div class="d-flex justify-content-between align-items-center mb-1">
-          <label class="settings-label">Gemini API Key</label>
-          <a
-            href="https://aistudio.google.com/app/apikey"
-            target="_blank"
-            class="get-key-link"
-          >
-            Get Free Key ↗
-          </a>
-        </div>
-        <div class="input-group input-group-sm mb-2">
-          <input
-            type="password"
-            v-model="apiKeyInput"
-            placeholder="Paste your Gemini API key here"
-            class="form-control form-control-sm bg-dark text-light border-secondary"
-          />
-          <button class="btn btn-sm btn-primary" @click="saveApiKey">Save</button>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mb-1">
-          <label class="settings-label">AI Model</label>
-          <span class="badge bg-secondary">Gemini 3.5 Flash</span>
-        </div>
-        <select v-model="selectedModel" @change="saveModel" class="form-select form-select-sm bg-dark text-light border-secondary mb-2">
-          <option value="gemini-3.5-flash">Gemini 3.5 Flash (Recommended)</option>
-          <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite (Fastest)</option>
-          <option value="gemini-3.6-flash">Gemini 3.6 Flash</option>
-          <option value="gemini-3.8-flash">Gemini 3.8 Flash</option>
-        </select>
-        <small class="text-muted d-block">
-          Key is securely stored in your workspace. Powered by Google Gemini AI.
-        </small>
       </div>
 
       <!-- Messages Body -->
@@ -130,9 +91,6 @@ export default {
     return {
       isOpen: false,
       isTyping: false,
-      showSettings: false,
-      apiKeyInput: "",
-      selectedModel: "gemini-3.5-flash",
       unreadCount: 0,
       userInput: "",
       messages: [
@@ -154,25 +112,10 @@ export default {
       this.isOpen = !this.isOpen;
       if (this.isOpen) {
         this.unreadCount = 0;
-        this.apiKeyInput = geminiService.getApiKey();
-        this.selectedModel = geminiService.getModel();
-        this.showSettings = false;
         this.$nextTick(() => {
           this.scrollToBottom();
         });
       }
-    },
-    saveApiKey() {
-      geminiService.setApiKey(this.apiKeyInput);
-      this.showSettings = false;
-      this.messages.push({
-        role: "bot",
-        text: "✅ AI key updated successfully! Ask me anything.",
-      });
-      this.scrollToBottom();
-    },
-    saveModel() {
-      geminiService.setModel(this.selectedModel);
     },
     sendPrompt(promptText) {
       this.userInput = promptText;
@@ -191,14 +134,11 @@ export default {
         const history = this.messages.slice(0, -1);
         const result = await geminiService.chatWithCineBot(history, text);
         this.messages.push({ role: "bot", text: result.reply });
-        if (result.needsKey && !geminiService.hasApiKey()) {
-          this.showSettings = true;
-        }
       } catch (err) {
         console.error("CineBot error:", err);
         this.messages.push({
           role: "bot",
-          text: "Oops! Something went wrong communicating with Gemini AI. Please check your network or API key.",
+          text: "Oops! Something went wrong communicating with Gemini AI. Please wait a moment and try again.",
         });
       } finally {
         this.isTyping = false;
@@ -360,28 +300,6 @@ export default {
   transform: rotate(90deg) scale(1.1) !important;
   border-color: transparent !important;
   box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45) !important;
-}
-
-.cinebot-settings-panel {
-  background: rgba(15, 23, 42, 0.95);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 12px 16px;
-}
-
-.settings-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: #90cea1;
-}
-
-.get-key-link {
-  font-size: 11px;
-  color: #01b4e4;
-  text-decoration: none;
-}
-
-.get-key-link:hover {
-  text-decoration: underline;
 }
 
 .cinebot-body {

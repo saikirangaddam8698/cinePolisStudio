@@ -7,15 +7,18 @@
         <p class="page-subtitle mb-0">Discover top stars from Hollywood, Tollywood, Bollywood, K-Drama, and world cinema</p>
       </div>
 
-      <div class="d-flex gap-2">
-        <input
-          type="text"
-          v-model="actorSearch"
-          placeholder="Filter by name (e.g.Tom, zendya)..."
-          class="form-control actor-search-input"
-        />
-        <button v-if="actorSearch" class="btn btn-outline-secondary btn-sm rounded-pill" @click="clearActorSearch">
-          Clear
+      <div class="actor-search-wrap d-flex align-items-center gap-2">
+        <div class="position-relative flex-grow-1">
+          <span class="actor-search-icon">🔍</span>
+          <input
+            type="text"
+            v-model="actorSearch"
+            placeholder="Filter by name (e.g. Tom, Zendaya)..."
+            class="form-control actor-search-input"
+          />
+        </div>
+        <button v-if="actorSearch" class="btn btn-actor-clear btn-sm rounded-pill" @click="clearActorSearch">
+          Clear ✕
         </button>
       </div>
     </div>
@@ -383,14 +386,71 @@ export default {
   font-size: 0.95rem;
 }
 
+.actor-search-wrap {
+  min-width: 280px;
+}
+
+.actor-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--tmdb-cyan);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.9;
+}
+
 .actor-search-input {
-  background: var(--bg-secondary) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 20px;
-  padding: 6px 16px;
-  font-size: 0.85rem;
+  background: var(--bg-card) !important;
+  color: #f8fafc !important;
+  border: 1.5px solid rgba(6, 182, 212, 0.45) !important;
+  border-radius: 25px !important;
+  padding: 8px 16px 8px 38px !important;
+  font-size: 0.88rem !important;
   min-width: 200px;
+  width: 100% !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+
+.actor-search-input::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .actor-search-input {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="light"] .actor-search-input::placeholder {
+  color: #64748b !important;
+}
+
+.actor-search-input:focus {
+  border-color: var(--tmdb-cyan) !important;
+  box-shadow: 0 0 16px var(--tmdb-cyan-glow) !important;
+}
+
+.btn-actor-clear {
+  background: var(--border-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-actor-clear:hover {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: var(--tmdb-pink);
+  color: var(--tmdb-pink);
 }
 
 .actor-card {

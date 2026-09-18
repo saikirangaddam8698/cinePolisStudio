@@ -254,6 +254,18 @@ const store = createStore({
         } catch (e) {
           console.error("Error fetching all regions actors:", e);
         }
+
+        try {
+          const fallback = await tmdbClient.get("/person/popular?language=en-US&page=1");
+          const popularList = fallback.data?.results || [];
+          if (popularList.length > 0) {
+            cachedGlobalActors = popularList;
+            commit("setActorsData", popularList);
+            return popularList;
+          }
+        } catch (fbErr) {
+          console.error("Fallback popular actors error:", fbErr);
+        }
         return;
       }
 
