@@ -654,7 +654,7 @@ export default {
 .modal-close-btn {
   position: absolute;
   top: 18px;
-  right: 22px;
+  right: 18px;
   background: var(--border-color);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
@@ -764,20 +764,22 @@ export default {
     font-size: 0.85rem !important;
   }
   .modal-backdrop-custom {
-    padding: 0.4rem !important;
+    padding: 12px !important;
   }
   .actor-modal {
-    padding: 1.25rem 0.85rem !important;
-    border-radius: 16px !important;
-    max-height: 94vh;
+    padding: 1.5rem 1rem !important;
+    border-radius: 18px !important;
+    max-height: 92vh;
     width: 100% !important;
+    margin: 0 auto !important;
+    position: relative !important;
   }
   .modal-close-btn {
-    top: 10px !important;
-    right: 10px !important;
-    width: 34px !important;
-    height: 34px !important;
-    font-size: 14px;
+    top: 14px !important;
+    right: 14px !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 15px !important;
   }
   .actor-modal__photo {
     max-width: 160px !important;

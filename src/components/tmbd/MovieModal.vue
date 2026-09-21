@@ -319,16 +319,19 @@ export default {
 }
 
 .cinematic-modal__overlay {
+  position: relative;
   background: var(--bg-modal);
   opacity: 0.97;
   padding: 2.2rem;
   border-radius: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cinematic-modal__close {
   position: absolute;
   top: 18px;
-  right: 22px;
+  right: 18px;
   background: var(--border-color);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
@@ -617,26 +620,30 @@ export default {
 
 @media (max-width: 576px) {
   .modal-backdrop-custom {
-    padding: 0.4rem !important;
+    padding: 12px !important;
   }
 
   .cinematic-modal {
-    border-radius: 16px;
-    max-height: 94vh;
+    border-radius: 18px !important;
+    max-height: 92vh !important;
     width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
 
   .cinematic-modal__overlay {
-    padding: 1.25rem 0.85rem !important;
-    border-radius: 16px;
+    padding: 1.5rem 1rem !important;
+    border-radius: 18px !important;
+    position: relative !important;
+    box-sizing: border-box !important;
   }
 
   .cinematic-modal__close {
-    top: 10px !important;
-    right: 10px !important;
-    width: 34px !important;
-    height: 34px !important;
-    font-size: 14px;
+    top: 14px !important;
+    right: 14px !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 15px !important;
   }
 
   .cinematic-modal__poster {
