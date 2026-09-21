@@ -25,7 +25,7 @@
           ❯
         </button>
 
-        <div class="container-fluid px-4 px-md-5 hero-content">
+        <div class="container-fluid px-2 px-sm-3 px-md-4 px-lg-5 hero-content">
           <div class="hero-badge">
             <span class="hero-badge__dot"></span>
             <span>#{{ activeSlideIndex + 1 }} TRENDING TODAY</span>
@@ -74,7 +74,7 @@
     <!-- Skeleton Hero while loading -->
     <SkeletonHero v-else />
 
-    <div class="container-fluid px-4 px-md-5 main-content">
+    <div class="container-fluid px-2 px-sm-3 px-md-4 px-lg-5 main-content">
       <!-- AI Mood Matcher Section -->
       <section class="ai-mood-section my-5 p-4 rounded-4 shadow-lg">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
@@ -828,6 +828,9 @@ export default {
 
 .horizontal-scroll-container {
   overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 1.5rem;
   scrollbar-width: thin;
   scrollbar-color: rgba(1, 180, 228, 0.4) transparent;

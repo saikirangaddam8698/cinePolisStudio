@@ -1,5 +1,5 @@
 <template>
-  <div class="actors-view container-fluid px-4 px-md-5 py-4">
+  <div class="actors-view container-fluid px-2 px-sm-3 px-md-4 px-lg-5 py-3 py-md-4">
     <!-- Page Header & Controls -->
     <div class="page-header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-3">
       <div>
@@ -37,14 +37,14 @@
     </div>
 
     <!-- Skeletons when initial data is loading -->
-    <div class="row g-4" v-if="isLoadingInitial">
+    <div class="row g-2 g-sm-3 g-md-4" v-if="isLoadingInitial">
       <div v-for="n in 12" :key="n" class="col-6 col-sm-4 col-md-3 col-xl-2">
         <SkeletonActor />
       </div>
     </div>
 
     <!-- Actors Grid -->
-    <div class="row g-4" v-else-if="filteredActors.length > 0">
+    <div class="row g-2 g-sm-3 g-md-4" v-else-if="filteredActors.length > 0">
       <div
         v-for="item in filteredActors"
         :key="item.id"
@@ -83,7 +83,7 @@
     </div>
 
     <!-- Load More Skeletons or Button -->
-    <div class="row g-4 mt-2" v-if="isLoadingMore">
+    <div class="row g-2 g-sm-3 g-md-4 mt-2" v-if="isLoadingMore">
       <div v-for="n in 6" :key="n" class="col-6 col-sm-4 col-md-3 col-xl-2">
         <SkeletonActor />
       </div>
@@ -590,17 +590,17 @@ export default {
 /* Modal styles */
 .modal-backdrop-custom {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.82);
   backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  overflow-x: hidden;
 }
 
 .actor-modal {
@@ -742,6 +742,53 @@ export default {
 
   .actor-modal {
     padding: 1.5rem 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 1.5rem !important;
+  }
+  .page-subtitle {
+    font-size: 0.85rem !important;
+  }
+  .modal-backdrop-custom {
+    padding: 0.4rem !important;
+  }
+  .actor-modal {
+    padding: 1.25rem 0.85rem !important;
+    border-radius: 16px !important;
+    max-height: 94vh;
+    width: 100% !important;
+  }
+  .modal-close-btn {
+    top: 10px !important;
+    right: 10px !important;
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 14px;
+  }
+  .actor-modal__photo {
+    max-width: 160px !important;
+    margin: 0 auto;
+  }
+  .actor-card__name {
+    font-size: 0.85rem !important;
+  }
+  .actor-card__info {
+    margin-top: 12px !important;
+    min-height: 40px !important;
+  }
+  .actor-card__photo-wrap {
+    border-radius: 10px !important;
+  }
+  .region-bar {
+    padding-bottom: 6px !important;
+    margin-bottom: 1rem !important;
+  }
+  .region-pill {
+    padding: 4px 10px !important;
+    font-size: 0.75rem !important;
   }
 }
 </style>

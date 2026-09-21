@@ -2,7 +2,7 @@
   <div class="cinematic-app d-flex flex-column min-vh-100" :data-theme="currentTheme">
     <!-- Premium Navigation Bar -->
     <header class="app-header sticky-top">
-      <div class="container-fluid px-3 px-md-4 py-2">
+      <div class="container-fluid px-2 px-sm-3 px-md-4 py-2">
         <div class="d-flex align-items-center justify-content-between">
           
           <!-- Left: Brand Logo & Navigation Links (Single instance) -->
@@ -63,7 +63,7 @@
           </div>
 
           <!-- Right: Search Bar + Theme Toggle + Ask AI + Mobile Menu Toggle -->
-          <div class="d-flex align-items-center gap-2 gap-md-3">
+          <div class="d-flex align-items-center gap-1 gap-sm-2 gap-md-3">
             <!-- Search bar with responsive max width -->
             <div class="search-nav-box">
               <searchPage />
@@ -134,7 +134,7 @@
 
     <!-- Mobile & Tablet Quick Region Bar (Outside header, directly above page lists) -->
     <div class="mobile-region-bar d-lg-none">
-      <div class="container-fluid px-3 py-2 d-flex align-items-center gap-2">
+      <div class="container-fluid px-2 px-sm-3 py-2 d-flex align-items-center gap-2 overflow-hidden">
         <!-- Region Dropdown Picker -->
         <div class="dropdown flex-shrink-0">
           <button
@@ -163,7 +163,7 @@
         </div>
 
         <!-- Quick Tap Region Pills (Horizontal Scroll) -->
-        <div class="mobile-region-chips d-flex align-items-center gap-1 overflow-auto">
+        <div class="mobile-region-chips flex-grow-1 d-flex align-items-center gap-1 overflow-auto">
           <button
             v-for="reg in regionsList"
             :key="reg.code"
@@ -592,6 +592,9 @@ export default {
   z-index: 1010;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .btn-mobile-region-dropdown {
@@ -615,8 +618,52 @@ export default {
 }
 
 .mobile-region-chips {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: 100%;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+@media (max-width: 576px) {
+  .brand-name {
+    font-size: 1.15rem;
+  }
+  .brand-badge {
+    display: none;
+  }
+  .brand-logo-glow {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  .brand-icon {
+    font-size: 15px;
+  }
+  .search-nav-box {
+    width: 120px;
+  }
+  .btn-ai-nav {
+    padding: 4px 10px !important;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+  .btn-theme-toggle,
+  .btn-mobile-toggle {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-name {
+    font-size: 1.05rem;
+  }
+  .search-nav-box {
+    width: 95px;
+  }
 }
 
 .mobile-region-chips::-webkit-scrollbar {

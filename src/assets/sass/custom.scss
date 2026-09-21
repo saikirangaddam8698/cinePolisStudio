@@ -53,16 +53,26 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: "Outfit", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#app,
+.cinematic-app {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Ensure bootstrap text-muted uses our variable */

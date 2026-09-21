@@ -262,17 +262,17 @@ export default {
 <style scoped>
 .modal-backdrop-custom {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.75);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.82);
   backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  overflow-x: hidden;
 }
 
 .cinematic-modal {
@@ -607,5 +607,48 @@ export default {
 
 .animate-fade-in {
   animation: fadeIn 0.22s ease-out;
+}
+
+@media (max-width: 576px) {
+  .modal-backdrop-custom {
+    padding: 0.4rem !important;
+  }
+
+  .cinematic-modal {
+    border-radius: 16px;
+    max-height: 94vh;
+    width: 100% !important;
+  }
+
+  .cinematic-modal__overlay {
+    padding: 1.25rem 0.85rem !important;
+    border-radius: 16px;
+  }
+
+  .cinematic-modal__close {
+    top: 10px !important;
+    right: 10px !important;
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 14px;
+  }
+
+  .cinematic-modal__poster {
+    max-width: 170px !important;
+    margin: 0 auto;
+  }
+
+  .cinematic-modal__title {
+    font-size: 1.35rem !important;
+  }
+
+  .cinematic-modal__year {
+    font-size: 1.05rem !important;
+  }
+
+  .cinematic-modal__meta {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
 }
 </style>

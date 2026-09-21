@@ -1,5 +1,5 @@
 <template>
-  <div class="movies-view container-fluid px-4 px-md-5 py-4">
+  <div class="movies-view container-fluid px-2 px-sm-3 px-md-4 px-lg-5 py-3 py-md-4">
     <!-- Page Header & Controls -->
     <div class="page-header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
       <div>
@@ -71,14 +71,14 @@
     </div>
 
     <!-- Skeletons when initial data is loading -->
-    <div class="row g-4" v-if="isLoadingInitial">
+    <div class="row g-2 g-sm-3 g-md-4" v-if="isLoadingInitial">
       <div v-for="n in 12" :key="n" class="col-6 col-sm-4 col-md-3 col-xl-2">
         <SkeletonCard />
       </div>
     </div>
 
     <!-- Movies Grid -->
-    <div class="row g-4" v-else-if="filteredMovies.length > 0">
+    <div class="row g-2 g-sm-3 g-md-4" v-else-if="filteredMovies.length > 0">
       <div
         v-for="item in filteredMovies"
         :key="item.id"
@@ -559,5 +559,32 @@ export default {
 
 .empty-icon {
   font-size: 3rem;
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 1.5rem !important;
+  }
+  .page-subtitle {
+    font-size: 0.85rem !important;
+  }
+  .movie-card__title {
+    font-size: 0.86rem !important;
+  }
+  .movie-card__info {
+    margin-top: 16px !important;
+    min-height: 44px !important;
+  }
+  .movie-card__poster-wrap {
+    border-radius: 10px !important;
+  }
+  .genre-bar {
+    padding-bottom: 6px !important;
+    margin-bottom: 1rem !important;
+  }
+  .genre-pill {
+    padding: 4px 10px !important;
+    font-size: 0.75rem !important;
+  }
 }
 </style>
