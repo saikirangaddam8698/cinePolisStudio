@@ -99,9 +99,9 @@
     </div>
 
     <!-- Actor Modal -->
-    <div v-if="selectedActor" class="modal-backdrop-custom" @click.self="selectedActor = null">
-      <div class="actor-modal animate-fade-in">
-        <button class="modal-close-btn" @click="selectedActor = null">✕</button>
+    <div v-if="selectedActor" class="modal-backdrop-custom" :class="{ 'backdrop-closing': isClosingModal }" @click.self="closeActorModal">
+      <div class="actor-modal animate-fade-in" :class="{ 'modal-closing': isClosingModal }">
+        <button class="modal-close-btn" :class="{ 'is-closing': isClosingModal }" @click="closeActorModal">✕</button>
         <div class="row g-4">
           <div class="col-12 col-md-4 text-center">
             <img
@@ -167,6 +167,7 @@ export default {
     return {
       actorSearch: "",
       selectedActor: null,
+      isClosingModal: false,
       currentPage: 1,
       isLoadingInitial: false,
       isLoadingMore: false,
@@ -323,9 +324,19 @@ export default {
     },
     openActorModal(actor) {
       this.selectedActor = actor;
+      this.isClosingModal = false;
+    },
+    closeActorModal() {
+      if (this.isClosingModal) return;
+      this.isClosingModal = true;
+      setTimeout(() => {
+        this.selectedActor = null;
+        this.isClosingModal = false;
+      }, 180);
     },
     openWork(work) {
       this.selectedActor = null;
+      this.isClosingModal = false;
       const mediaType = work.media_type || (work.title ? "movie" : "tv");
       this.openDetailModal({ item: work, type: mediaType });
     },

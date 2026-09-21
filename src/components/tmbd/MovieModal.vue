@@ -1,9 +1,9 @@
 <template>
-  <div v-if="activeItem" class="modal-backdrop-custom" @click.self="close">
-    <div class="cinematic-modal animate-fade-in" :style="modalBackdropStyle">
+  <div v-if="activeItem" class="modal-backdrop-custom" :class="{ 'backdrop-closing': isClosing }" @click.self="close">
+    <div class="cinematic-modal animate-fade-in" :class="{ 'modal-closing': isClosing }" :style="modalBackdropStyle">
       <div class="cinematic-modal__overlay">
         <!-- Close Button -->
-        <button class="cinematic-modal__close" @click="close" aria-label="Close modal">
+        <button class="cinematic-modal__close" :class="{ 'is-closing': isClosing }" @click="close" aria-label="Close modal">
           ✕
         </button>
 
@@ -157,6 +157,7 @@ export default {
     return {
       aiInsight: "",
       isGeneratingInsight: false,
+      isClosing: false,
     };
   },
   computed: {
@@ -210,7 +211,12 @@ export default {
   methods: {
     ...mapActions(["closeDetailModal"]),
     close() {
-      this.closeDetailModal();
+      if (this.isClosing) return;
+      this.isClosing = true;
+      setTimeout(() => {
+        this.closeDetailModal();
+        this.isClosing = false;
+      }, 180);
     },
     getPosterUrl(path) {
       if (!path) return require("@/assets/cinema_logo.jpg");

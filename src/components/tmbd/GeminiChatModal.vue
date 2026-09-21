@@ -13,7 +13,7 @@
     </button>
 
     <!-- Chat Modal / Drawer -->
-    <div v-if="isOpen" class="cinebot-window animate-slide-up shadow-2xl">
+    <div v-if="isOpen" class="cinebot-window animate-slide-up shadow-2xl" :class="{ 'cinebot-closing': isClosing }">
       <!-- Header -->
       <div class="cinebot-header d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-2">
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="d-flex align-items-center gap-2">
-          <button class="header-icon-btn header-icon-btn--close" @click="toggleChat" title="Close">
+          <button class="header-icon-btn header-icon-btn--close" :class="{ 'is-closing': isClosing }" @click="closeChat" title="Close">
             ✕
           </button>
         </div>
@@ -90,6 +90,7 @@ export default {
   data() {
     return {
       isOpen: false,
+      isClosing: false,
       isTyping: false,
       unreadCount: 0,
       userInput: "",
@@ -109,13 +110,24 @@ export default {
   },
   methods: {
     toggleChat() {
-      this.isOpen = !this.isOpen;
       if (this.isOpen) {
+        this.closeChat();
+      } else {
+        this.isOpen = true;
+        this.isClosing = false;
         this.unreadCount = 0;
         this.$nextTick(() => {
           this.scrollToBottom();
         });
       }
+    },
+    closeChat() {
+      if (this.isClosing) return;
+      this.isClosing = true;
+      setTimeout(() => {
+        this.isOpen = false;
+        this.isClosing = false;
+      }, 180);
     },
     sendPrompt(promptText) {
       this.userInput = promptText;
@@ -294,12 +306,21 @@ export default {
   box-shadow: 0 4px 14px var(--tmdb-cyan-glow) !important;
 }
 
-.header-icon-btn--close:hover {
+.header-icon-btn--close:hover,
+.header-icon-btn--close:focus,
+.header-icon-btn--close:active,
+.header-icon-btn--close.is-closing {
   background: var(--tmdb-pink) !important;
   color: #ffffff !important;
   transform: rotate(90deg) scale(1.1) !important;
   border-color: transparent !important;
-  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45) !important;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.5) !important;
+}
+
+.cinebot-window.cinebot-closing {
+  opacity: 0 !important;
+  transform: translateY(20px) scale(0.95) !important;
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out !important;
 }
 
 .cinebot-body {

@@ -45,7 +45,7 @@
                   <span class="globe-icon">🌐</span>
                   <span>{{ currentRegionLabel }}</span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-custom" aria-labelledby="regionDropdown">
+                <ul class="dropdown-menu dropdown-menu-custom shadow" aria-labelledby="regionDropdown">
                   <li v-for="reg in regionsList" :key="reg.code">
                     <a
                       class="dropdown-item d-flex justify-content-between align-items-center"
